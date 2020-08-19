@@ -1,16 +1,14 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type Koa from "koa";
-import * as Sentry from "@sentry/node";
+import type { Monitoring } from "@ailo/monitoring";
 import { Span } from "@sentry/apm";
 
 // Copy of `Sentry.Handlers.tracingHandler()`,
 // but for koa instead of express
 // ( https://github.com/getsentry/sentry-javascript/blob/master/packages/node/src/handlers.ts#L20 )
-// eslint-disable-next-line unicorn/consistent-function-scoping
-export const createSentryTracingMiddleware = (): Koa.Middleware => async (
-  ctx,
-  next
-) => {
+export const createSentryTracingMiddleware = (
+  monitoring: Monitoring
+): Koa.Middleware => (ctx, next) => {
   const reqMethod = ctx.method;
   const reqUrl = ctx.url;
 
@@ -32,32 +30,28 @@ export const createSentryTracingMiddleware = (): Koa.Middleware => async (
   const correlationId: string | undefined =
     ctx.request.headers["x-correlation-id"];
 
-  const transaction = Sentry.startTransaction({
-    name: `${reqMethod} ${reqUrl}`,
-    op: "http.server",
-    parentSpanId,
-    sampled,
-    traceId,
-    tags: {
-      correlation_id: correlationId || "unknown",
+  return monitoring.runInTransaction(
+    {
+      name: `${reqMethod} ${reqUrl}`,
+      op: "http.server",
+      parentSpanId,
+      sampled,
+      traceId,
+      tags: {
+        correlation_id: correlationId || "unknown",
+      },
     },
-  });
+    (transaction) => {
+      ctx.__sentry_transaction = transaction;
 
-  // We put the transaction on the scope so users can attach children to it
-  Sentry.getCurrentHub().configureScope((scope) => {
-    scope.setSpan(transaction);
-  });
-
-  ctx.__sentry_transaction = transaction;
-
-  try {
-    await next();
-  } finally {
-    transaction.setHttpStatus(ctx.status);
-    transaction.finish();
-
-    Sentry.getCurrentHub().configureScope((scope) => {
-      scope.setSpan(undefined);
-    });
-  }
+      try {
+        const result = next();
+        transaction.setHttpStatus(ctx.status);
+        return result;
+      } catch (error) {
+        transaction.setHttpStatus(500);
+        throw error;
+      }
+    }
+  );
 };

@@ -14,9 +14,10 @@ Middleware for Koa HTTP server that:
 
 3. ```ts
    import { applyKoaSentryMiddleware } from "@ailo/koa-sentry-middleware";
+   import { monitoring } from "./utils/monitoring";
 
    export const app = new Koa();
-   applyKoaSentryMiddleware(app);
+   applyKoaSentryMiddleware(app, { monitoring });
    ```
 
 ## Development
