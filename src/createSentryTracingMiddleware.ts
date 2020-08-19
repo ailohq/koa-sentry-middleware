@@ -52,6 +52,7 @@ export const createSentryTracingMiddleware = (
         transaction.setHttpStatus(500);
         throw error;
       }
-    }
+    },
+    [ctx.req, ctx.res, ctx.req.socket]
   );
 };
