@@ -7,18 +7,42 @@ import { createSentryTracingMiddleware } from "./createSentryTracingMiddleware";
 
 interface KoaSentryMiddlewareOptions {
   /**
-   * If given, enables tracing using Sentry Performance.
+   * Required if `trace` is true.
    */
   monitoring?: Monitoring;
+
+  /**
+   * If true, enables tracing using Sentry Performance.
+   * Requires `monitoring` to be passed as well.
+   * @default true
+   */
+  trace?: boolean;
+
+  /**
+   * Should trace the given request?
+   * @default ctx => !["/ping", "/metrics"].includes(ctx.path)
+   */
+  traceRequest?(ctx: Koa.Context): boolean;
 }
 
 export function applyKoaSentryMiddleware(
   app: Koa,
-  { monitoring }: KoaSentryMiddlewareOptions = {}
+  {
+    monitoring,
+    trace = !!monitoring,
+    traceRequest = (ctx) => !["/ping", "/metrics"].includes(ctx.path),
+  }: KoaSentryMiddlewareOptions = {}
 ) {
   app.use(createSentryRequestMiddleware());
-  if (monitoring) {
-    app.use(createSentryTracingMiddleware(monitoring));
+
+  if (trace) {
+    if (!monitoring) {
+      throw new TypeError(
+        `\`monitoring\` needs to be passed when \`trace\` is true`
+      );
+    }
+    app.use(createSentryTracingMiddleware({ monitoring, traceRequest }));
   }
+
   app.on("error", createSentryErrorHandler());
 }

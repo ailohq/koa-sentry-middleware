@@ -6,9 +6,17 @@ import { Span } from "@sentry/apm";
 // Copy of `Sentry.Handlers.tracingHandler()`,
 // but for koa instead of express
 // ( https://github.com/getsentry/sentry-javascript/blob/master/packages/node/src/handlers.ts#L20 )
-export const createSentryTracingMiddleware = (
-  monitoring: Monitoring
-): Koa.Middleware => (ctx, next) => {
+export const createSentryTracingMiddleware = ({
+  monitoring,
+  traceRequest,
+}: {
+  monitoring: Monitoring;
+  traceRequest?(ctx: Koa.Context): boolean;
+}): Koa.Middleware => (ctx, next) => {
+  if (traceRequest && !traceRequest(ctx)) {
+    return next();
+  }
+
   const reqMethod = ctx.method;
   const reqUrl = ctx.url;
 
