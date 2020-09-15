@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/ailohq/koa-sentry-middleware/compare/v2.0.1...v2.1.0) (2020-09-15)
+
+
+### Features
+
+* Ignore tracing for /ping and /metrics requests by default ([50e03f1](https://github.com/ailohq/koa-sentry-middleware/commit/50e03f1abe5c9e25bf837c58637b8181afbc013e))
+
 ### [2.0.1](https://github.com/ailohq/koa-sentry-middleware/compare/v2.0.0...v2.0.1) (2020-08-19)
 
 
