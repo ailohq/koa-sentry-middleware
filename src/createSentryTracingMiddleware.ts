@@ -49,11 +49,11 @@ export const createSentryTracingMiddleware = ({
         correlation_id: correlationId || "unknown",
       },
     },
-    (transaction) => {
+    async (transaction) => {
       ctx.__sentry_transaction = transaction;
 
       try {
-        const result = next();
+        const result = await next();
         transaction.setHttpStatus(ctx.status);
         return result;
       } catch (error) {
