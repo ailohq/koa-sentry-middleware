@@ -23,11 +23,11 @@ export const createSentryTracingMiddleware = ({
   let traceId;
   let parentSpanId;
   let sampled;
-
-  // If there is a trace header set, we extract the data from it and set the span on the scope
-  // to be the origin an created transaction set the parent_span_id / trace_id
-  if (ctx.request.headers["sentry-trace"]) {
-    const span = Span.fromTraceparent(ctx.request.headers["sentry-trace"]);
+  const traceToken =
+    ctx.request.headers["ailo-trace-token"] ||
+    ctx.request.headers["sentry-trace"];
+  if (traceToken) {
+    const span = Span.fromTraceparent(traceToken);
     if (span) {
       traceId = span.traceId;
       parentSpanId = span.parentSpanId;
