@@ -23,11 +23,11 @@ export const createSentryTracingMiddleware = ({
   let traceId;
   let parentSpanId;
   let sampled;
-  const traceToken =
-    ctx.request.headers["ailo-trace-token"] ||
+  const traceparent =
+    ctx.request.headers["ailo-traceparent"] ||
     ctx.request.headers["sentry-trace"];
-  if (traceToken) {
-    const span = Span.fromTraceparent(traceToken);
+  if (traceparent) {
+    const span = Span.fromTraceparent(traceparent);
     if (span) {
       traceId = span.traceId;
       parentSpanId = span.parentSpanId;
