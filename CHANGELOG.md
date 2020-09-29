@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/ailohq/koa-sentry-middleware/compare/v2.1.1...v2.2.0) (2020-09-29)
+
+
+### Features
+
+* get traceparent header from `ailo-trace-token` header as well ([63b9577](https://github.com/ailohq/koa-sentry-middleware/commit/63b9577dace959402ceef9740cf4954f114b3104))
+
 ### [2.1.1](https://github.com/ailohq/koa-sentry-middleware/compare/v2.1.0...v2.1.1) (2020-09-15)
 
 
