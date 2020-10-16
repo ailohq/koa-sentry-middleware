@@ -35,9 +35,6 @@ export const createSentryTracingMiddleware = ({
     }
   }
 
-  const correlationId: string | undefined =
-    ctx.request.headers["x-correlation-id"];
-
   return monitoring.runInTransaction(
     {
       name: `${reqMethod} ${reqUrl}`,
@@ -46,7 +43,9 @@ export const createSentryTracingMiddleware = ({
       sampled,
       traceId,
       tags: {
-        correlation_id: correlationId || "unknown",
+        device_id: ctx.request.headers["x-device-id"],
+        session_id: ctx.request.headers["x-session-id"],
+        correlation_id: ctx.request.headers["x-correlation-id"],
       },
     },
     async (transaction) => {

@@ -23,11 +23,10 @@ export const createSentryRequestMiddleware = (): Koa.Middleware => {
 
     Sentry.getCurrentHub().configureScope((scope) => {
       scope.clearBreadcrumbs();
-
-      const correlationId: string | undefined =
-        ctx.request.headers["x-correlation-id"];
       scope.setTags({
-        correlation_id: correlationId || "unknown",
+        device_id: ctx.request.headers["x-device-id"],
+        session_id: ctx.request.headers["x-session-id"],
+        correlation_id: ctx.request.headers["x-correlation-id"],
       });
     });
 
@@ -39,8 +38,11 @@ export const createSentryRequestMiddleware = (): Koa.Middleware => {
       scope.setTags({
         // This is the only way to remove tags for now
         // ( https://github.com/getsentry/sentry-javascript/issues/2218 )
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        device_id: undefined as any,
+        session_id: undefined as any,
         correlation_id: undefined as any,
+        /* eslint-enable @typescript-eslint/no-explicit-any */
       });
     });
   };
