@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/ailohq/koa-sentry-middleware/compare/v2.2.2...v2.3.0) (2020-10-16)
+
+
+### Features
+
+* Mark the transaction always as sampled if `tracesSampleRate` is set to 1 (META-75) ([1c49130](https://github.com/ailohq/koa-sentry-middleware/commit/1c49130b12c425a97ce14affca6e836a35289a64))
+
 ### [2.2.2](https://github.com/ailohq/koa-sentry-middleware/compare/v2.2.1...v2.2.2) (2020-10-16)
 
 
