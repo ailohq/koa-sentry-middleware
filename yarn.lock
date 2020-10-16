@@ -21,10 +21,10 @@
     eslint-plugin-react-hooks "2.5.0"
     eslint-plugin-unicorn "17.2.0"
 
-"@ailo/monitoring@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@ailo/monitoring/-/monitoring-1.1.1.tgz#6d53c9bcbe50151860d17f2d1c53311c253ec169"
-  integrity sha512-2bE4I7lykviY+NwZJkP1aYZ7nZ6pGEZ5drpVwyPdwVudKaZC7wtTCKKfIZnH/y7QThC4GxOc+6M0OBIlEY8TQQ==
+"@ailo/monitoring@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@ailo/monitoring/-/monitoring-1.7.0.tgz#566ae52b00b2ae18105351287a24c556fb3b0e80"
+  integrity sha512-57Tf1NWHgP9t9JyBOr/jrQlSHJM+6BSUYDP4VTd5+3EKGzDgrVIdyjLQfkz2gVVp1KwA7leMw/SOiZoo/IfFxg==
   dependencies:
     cls-hooked "^4.2.2"
 

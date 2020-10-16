@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type Koa from "koa";
-import type { Monitoring } from "@ailo/monitoring";
+import type { SentryMonitoring } from "@ailo/monitoring";
 import { Span } from "@sentry/apm";
 
 // Copy of `Sentry.Handlers.tracingHandler()`,
@@ -10,7 +10,7 @@ export const createSentryTracingMiddleware = ({
   monitoring,
   traceRequest,
 }: {
-  monitoring: Monitoring;
+  monitoring: SentryMonitoring;
   traceRequest?(ctx: Koa.Context): boolean;
 }): Koa.Middleware => (ctx, next) => {
   if (traceRequest && !traceRequest(ctx)) {
@@ -31,7 +31,7 @@ export const createSentryTracingMiddleware = ({
     if (span) {
       traceId = span.traceId;
       parentSpanId = span.parentSpanId;
-      sampled = span.sampled;
+      sampled = monitoring.options.tracesSampleRate >= 1 ? true : span.sampled;
     }
   }
 

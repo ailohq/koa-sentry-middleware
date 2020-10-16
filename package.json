@@ -59,7 +59,7 @@
   "dependencies": {},
   "devDependencies": {
     "@ailo/eslint-config": "1.0.1",
-    "@ailo/monitoring": "^1.1.1",
+    "@ailo/monitoring": "^1.7.0",
     "@bitjson/npm-scripts-info": "^1.0.0",
     "@sentry/apm": "^5.21.1",
     "@sentry/node": "^5.21.1",
@@ -80,7 +80,7 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@ailo/monitoring": "^1.1.1",
+    "@ailo/monitoring": "^1.7.0",
     "@sentry/apm": "^5.21.1",
     "@sentry/node": "^5.21.1"
   }

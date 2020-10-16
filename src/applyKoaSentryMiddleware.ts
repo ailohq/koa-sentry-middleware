@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type Koa from "koa";
-import type { Monitoring } from "@ailo/monitoring";
+import type { SentryMonitoring } from "@ailo/monitoring";
 import { createSentryErrorHandler } from "./createSentryErrorHandler";
 import { createSentryRequestMiddleware } from "./createSentryRequestMiddleware";
 import { createSentryTracingMiddleware } from "./createSentryTracingMiddleware";
@@ -9,7 +9,7 @@ interface KoaSentryMiddlewareOptions {
   /**
    * Required if `trace` is true.
    */
-  monitoring?: Monitoring;
+  monitoring?: SentryMonitoring;
 
   /**
    * If true, enables tracing using Sentry Performance.
