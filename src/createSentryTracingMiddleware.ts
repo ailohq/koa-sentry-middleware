@@ -43,9 +43,9 @@ export const createSentryTracingMiddleware = ({
       sampled,
       traceId,
       tags: {
-        device_id: ctx.request.headers["x-device-id"],
-        session_id: ctx.request.headers["x-session-id"],
-        correlation_id: ctx.request.headers["x-correlation-id"],
+        device_id: ctx.request.headers["ailo-device-id"],
+        session_id: ctx.request.headers["ailo-session-id"],
+        correlation_id: ctx.request.headers["ailo-correlation-id"],
       },
     },
     async (transaction) => {

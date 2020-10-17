@@ -24,9 +24,9 @@ export const createSentryRequestMiddleware = (): Koa.Middleware => {
     Sentry.getCurrentHub().configureScope((scope) => {
       scope.clearBreadcrumbs();
       scope.setTags({
-        device_id: ctx.request.headers["x-device-id"],
-        session_id: ctx.request.headers["x-session-id"],
-        correlation_id: ctx.request.headers["x-correlation-id"],
+        device_id: ctx.request.headers["ailo-device-id"],
+        session_id: ctx.request.headers["ailo-session-id"],
+        correlation_id: ctx.request.headers["ailo-correlation-id"],
       });
     });
 
