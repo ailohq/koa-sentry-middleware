@@ -18,7 +18,7 @@ export const createSentryTracingMiddleware = ({
   }
 
   const reqMethod = ctx.method;
-  const reqUrl = ctx.url;
+  const reqPath = ctx.path;
 
   let traceId;
   let parentSpanId;
@@ -37,7 +37,7 @@ export const createSentryTracingMiddleware = ({
 
   return monitoring.runInTransaction(
     {
-      name: `${reqMethod} ${reqUrl}`,
+      name: `${reqMethod} ${reqPath}`,
       op: "http.server",
       parentSpanId,
       sampled,
