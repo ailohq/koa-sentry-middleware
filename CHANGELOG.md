@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.2](https://github.com/ailohq/koa-sentry-middleware/compare/v2.3.1...v2.3.2) (2020-10-18)
+
+
+### Bug Fixes
+
+* Use req.path, not req.url for setting sentry transaction name ([a7545ce](https://github.com/ailohq/koa-sentry-middleware/commit/a7545cedd1a12955395fb77249f6f17f17eac8b3))
+
 ### [2.3.1](https://github.com/ailohq/koa-sentry-middleware/compare/v2.3.0...v2.3.1) (2020-10-17)
 
 ## [2.3.0](https://github.com/ailohq/koa-sentry-middleware/compare/v2.2.2...v2.3.0) (2020-10-16)
