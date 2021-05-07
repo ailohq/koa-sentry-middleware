@@ -1,4 +1,4 @@
-import type { Transaction } from "@sentry/apm";
+import type { Transaction } from "@sentry/tracing";
 import * as Sentry from "@sentry/node";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type Koa from "koa";

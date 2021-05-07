@@ -8,7 +8,7 @@ Middleware for Koa HTTP server that:
 
 ## Usage example
 
-1. Setup Sentry (`@sentry/node` and `@sentry/apm` packages - refer to Sentry docs).
+1. Setup Sentry (`@sentry/node` and `@sentry/tracing` packages - refer to Sentry docs).
 
 2. `yarn add @ailo/koa-sentry-middleware`
 

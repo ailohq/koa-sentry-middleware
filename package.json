@@ -59,10 +59,10 @@
   "dependencies": {},
   "devDependencies": {
     "@ailo/eslint-config": "1.0.1",
-    "@ailo/monitoring": "^1.7.0",
+    "@ailo/monitoring": "^1.7.5",
     "@bitjson/npm-scripts-info": "^1.0.0",
-    "@sentry/apm": "^5.21.1",
-    "@sentry/node": "^5.21.1",
+    "@sentry/node": "^6.3.5",
+    "@sentry/tracing": "^6.3.5",
     "@types/jest": "26.0.3",
     "@types/koa": "^2.11.3",
     "codecov": "^3.7.1",
@@ -80,8 +80,8 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@ailo/monitoring": "^1.7.0",
-    "@sentry/apm": "^5.21.1",
-    "@sentry/node": "^5.21.1"
+    "@ailo/monitoring": "^1.7.5",
+    "@sentry/node": "^6.3.5",
+    "@sentry/tracing": "^6.3.5"
   }
 }

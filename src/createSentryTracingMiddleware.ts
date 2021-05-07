@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type Koa from "koa";
 import type { SentryMonitoring } from "@ailo/monitoring";
-import { Span } from "@sentry/apm";
+import { extractTraceparentData } from "@sentry/tracing";
 
 // Copy of `Sentry.Handlers.tracingHandler()`,
 // but for koa instead of express
@@ -27,11 +27,12 @@ export const createSentryTracingMiddleware = ({
     ctx.request.headers["ailo-traceparent"] ||
     ctx.request.headers["sentry-trace"];
   if (traceparent) {
-    const span = Span.fromTraceparent(traceparent);
+    const span = extractTraceparentData(traceparent);
     if (span) {
       traceId = span.traceId;
       parentSpanId = span.parentSpanId;
-      sampled = monitoring.options.tracesSampleRate >= 1 ? true : span.sampled;
+      sampled =
+        monitoring.options.tracesSampleRate >= 1 ? true : span.parentSampled;
     }
   }
 
